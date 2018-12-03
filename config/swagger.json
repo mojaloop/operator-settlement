@@ -1,0 +1,471 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0",
+        "title": "Casablanca settlement file service API definition",
+        "description": "Casablanca settlement file service API definition"
+    },
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/settlementFile/": {
+            "post": {
+                "description": "Save a new settlement file.",
+                "summary": "PostSettlementFile",
+                "tags": [
+                    "settlementFile"
+                ],
+                "operationId": "PostSettlementFile",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NewSettlementFile"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/parameters/Accept"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "$ref": "#/responses/SettlementFileResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/ErrorResponse400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/ErrorResponse401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/ErrorResponse403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/ErrorResponse404"
+                    },
+                    "405": {
+                        "$ref": "#/responses/ErrorResponse405"
+                    },
+                    "406": {
+                        "$ref": "#/responses/ErrorResponse406"
+                    },
+                    "501": {
+                        "$ref": "#/responses/ErrorResponse501"
+                    },
+                    "503": {
+                        "$ref": "#/responses/ErrorResponse503"
+                    }
+                }
+            }
+        },
+        "/settlementFile/{settlementId}": {
+            "get": {
+                "description": "Get a settlement file by ID.",
+                "summary": "GetSettlementFilesBySettlementID",
+                "tags": [
+                    "settlementFiles"
+                ],
+                "operationId": "GetSettlementFilesBySettlementID",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/Accept"
+                    },
+                    {
+                        "name": "settlementId",
+                        "description": "The ID pertaining to the settlement for which to return settlement files",
+                        "in": "path",
+                        "pattern": "^[1-9]\\d{0,9}$",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "$ref": "#/responses/SettlementFileListResponse"
+                    },
+                    "400": {
+                        "$ref": "#/responses/ErrorResponse400"
+                    },
+                    "401": {
+                        "$ref": "#/responses/ErrorResponse401"
+                    },
+                    "403": {
+                        "$ref": "#/responses/ErrorResponse403"
+                    },
+                    "404": {
+                        "$ref": "#/responses/ErrorResponse404"
+                    },
+                    "405": {
+                        "$ref": "#/responses/ErrorResponse405"
+                    },
+                    "406": {
+                        "$ref": "#/responses/ErrorResponse406"
+                    },
+                    "501": {
+                        "$ref": "#/responses/ErrorResponse501"
+                    },
+                    "503": {
+                        "$ref": "#/responses/ErrorResponse503"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "NewSettlementFile": {
+            "title": "Settlement file object",
+            "type": "object",
+            "description": "POST /settlement/",
+            "properties": {
+                "settlementId": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Unique identifier associated with the settlement file"
+                },
+                "settlementFile": {
+                    "type": "string",
+                    "description": "A string containing the ISO 20022 pain.001.001.03 XML settlement file. Note that this file is not validated by this service because a) we do not have access to a validator for this format; and b) the settlement bank further restricts our usage to a subset of this format."
+                }
+            }
+        },
+        "SettlementFile": {
+            "title": "Settlement file object",
+            "type": "object",
+            "description": "GET /settlement/{settlementId}",
+            "properties": {
+                "settlementFileId": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Unique identifier associated with the settlement file"
+                },
+                "settlementId": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Unique identifier associated with the settlement file"
+                },
+                "createdDate": {
+                    "type": "string",
+                    "pattern": "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)$",
+                    "description": "The API data type Date is a JSON String in a lexical format that is restricted by a regular expression for interoperability reasons. This format, as specified in ISO 8601, contains a date only. A more readable version of the format is yyyy-MM-dd. Examples - \"1982-05-23\", \"1987-08-05”"
+                },
+                "settlementFile": {
+                    "type": "string",
+                    "description": "A string containing the ISO 20022 pain.001.001.03 XML settlement file. Note that this file is not validated by this service because a) we do not have access to a validator for this format; and b) the settlement bank further restricts our usage to a subset of this format."
+                }
+            }
+        },
+        "Date": {
+            "title": "Date",
+            "type": "string",
+            "pattern": "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)$",
+            "description": "The API data type Date is a JSON String in a lexical format that is restricted by a regular expression for interoperability reasons. This format, as specified in ISO 8601, contains a date only. A more readable version of the format is yyyy-MM-dd. Examples - \"1982-05-23\", \"1987-08-05”"
+        },
+        "ErrorCode": {
+            "title": "ErrorCode",
+            "type": "string",
+            "pattern": "^[1-9]\\d{3}$",
+            "description": "The API data type ErrorCode is a JSON String of four characters, consisting of digits only. Negative numbers are not allowed. A leading zero is not allowed. Each error code in the API is a four-digit number, for example, 1234, where the first number (1 in the example) represents the high-level error category, the second number (2 in the example) represents the low-level error category, and the last two numbers (34 in the example) represents the specific error."
+        },
+        "ErrorDescription": {
+            "title": "ErrorDescription",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "Error description string."
+        },
+        "ErrorInformation": {
+            "title": "ErrorInformation",
+            "type": "object",
+            "description": "Data model for the complex type ErrorInformation.",
+            "properties": {
+                "errorCode": {
+                    "type": "string",
+                    "description": "Specific error number."
+                },
+                "errorDescription": {
+                    "type": "string",
+                    "description": "Error description string."
+                },
+                "extensionList": {
+                    "$ref": "#/definitions/ExtensionList",
+                    "description": "Optional list of extensions, specific to deployment."
+                }
+            },
+            "required": [
+                "errorCode",
+                "errorDescription"
+            ]
+        },
+        "ErrorInformationObject": {
+            "title": "ErrorInformationObject",
+            "type": "object",
+            "description": "Data model for the complex type object that contains ErrorInformation.",
+            "properties": {
+                "errorInformation": {
+                    "$ref": "#/definitions/ErrorInformation"
+                }
+            },
+            "required": [
+                "errorInformation"
+            ]
+        },
+        "ErrorInformationResponse": {
+            "title": "ErrorInformationResponse",
+            "type": "object",
+            "description": "Data model for the complex type object that contains an optional element ErrorInformation used along with 4xx and 5xx responses.",
+            "properties": {
+                "errorInformation": {
+                    "$ref": "#/definitions/ErrorInformation"
+                }
+            }
+        },
+        "Extension": {
+            "title": "Extension",
+            "type": "object",
+            "description": "Data model for the complex type Extension",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "Extension key."
+                },
+                "value": {
+                    "type": "string",
+                    "description": "Extension value."
+                }
+            },
+            "required": [
+                "key",
+                "value"
+            ]
+        },
+        "ExtensionList": {
+            "title": "ExtensionList",
+            "type": "object",
+            "description": "Data model for the complex type ExtensionList",
+            "properties": {
+                "extension": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Extension"
+                    },
+                    "minItems": 1,
+                    "maxItems": 16,
+                    "description": "Number of Extension elements"
+                }
+            },
+            "required": [
+                "extension"
+            ]
+        }
+    },
+    "responses": {
+        "Response200": {
+            "description": "OK"
+        },
+        "Response202": {
+            "description": "Accepted"
+        },
+        "SettlementFileListResponse": {
+            "description": "List of settlement files associated with this settlement",
+            "schema": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/definitions/SettlementFile"
+                }
+            },
+            "headers": {
+                "Content-Length": {
+                    "description": "The Content-Length header field indicates the anticipated size of the payload body. Only sent if there is a body.",
+                    "type": "integer"
+                },
+                "Content-Type": {
+                    "description": "The Content-Type header indicates the specific version of the API used to send the payload body.",
+                    "type": "string"
+                }
+            }
+        },
+        "SettlementFileResponse": {
+            "description": "An object describing (and containing) a settlement file.",
+            "schema": {
+                "$ref": "#/definitions/SettlementFile"
+            },
+            "headers": {
+                "Content-Length": {
+                    "description": "The Content-Length header field indicates the anticipated size of the payload body. Only sent if there is a body.",
+                    "type": "integer"
+                },
+                "Content-Type": {
+                    "description": "The Content-Type header indicates the specific version of the API used to send the payload body.",
+                    "type": "string"
+                }
+            }
+        },
+        "ErrorResponse400": {
+            "description": "Bad Request - The application cannot process the request; for example, due to malformed syntax or the payload exceeded size restrictions.",
+            "schema": {
+                "$ref": "#/definitions/ErrorInformationResponse"
+            },
+            "headers": {
+                "Content-Length": {
+                    "description": "The Content-Length header field indicates the anticipated size of the payload body. Only sent if there is a body.",
+                    "type": "integer"
+                },
+                "Content-Type": {
+                    "description": "The Content-Type header indicates the specific version of the API used to send the payload body.",
+                    "type": "string"
+                }
+            }
+        },
+        "ErrorResponse401": {
+            "description": "Unauthorized - The request requires authentication in order to be processed.",
+            "schema": {
+                "$ref": "#/definitions/ErrorInformationResponse"
+            },
+            "headers": {
+                "Content-Length": {
+                    "description": "The Content-Length header field indicates the anticipated size of the payload body. Only sent if there is a body.",
+                    "type": "integer"
+                },
+                "Content-Type": {
+                    "description": "The Content-Type header indicates the specific version of the API used to send the payload body.",
+                    "type": "string"
+                }
+            }
+        },
+        "ErrorResponse403": {
+            "description": "Forbidden - The request was denied and will be denied in the future.",
+            "schema": {
+                "$ref": "#/definitions/ErrorInformationResponse"
+            },
+            "headers": {
+                "Content-Length": {
+                    "description": "The Content-Length header field indicates the anticipated size of the payload body. Only sent if there is a body.",
+                    "type": "integer"
+                },
+                "Content-Type": {
+                    "description": "The Content-Type header indicates the specific version of the API used to send the payload body.",
+                    "type": "string"
+                }
+            }
+        },
+        "ErrorResponse404": {
+            "description": "Not Found - The resource specified in the URI was not found.",
+            "schema": {
+                "$ref": "#/definitions/ErrorInformationResponse"
+            },
+            "headers": {
+                "Content-Length": {
+                    "description": "The Content-Length header field indicates the anticipated size of the payload body. Only sent if there is a body.",
+                    "type": "integer"
+                },
+                "Content-Type": {
+                    "description": "The Content-Type header indicates the specific version of the API used to send the payload body.",
+                    "type": "string"
+                }
+            }
+        },
+        "ErrorResponse405": {
+            "description": "Method Not Allowed - An unsupported HTTP method for the request was used.",
+            "schema": {
+                "$ref": "#/definitions/ErrorInformationResponse"
+            },
+            "headers": {
+                "Content-Length": {
+                    "description": "The Content-Length header field indicates the anticipated size of the payload body. Only sent if there is a body.",
+                    "type": "integer"
+                },
+                "Content-Type": {
+                    "description": "The Content-Type header indicates the specific version of the API used to send the payload body.",
+                    "type": "string"
+                }
+            }
+        },
+        "ErrorResponse406": {
+            "description": "Not acceptable - The server is not capable of generating content according to the Accept headers sent in the request. Used in the API to indicate that the server does not support the version that the client is requesting.",
+            "schema": {
+                "$ref": "#/definitions/ErrorInformationResponse"
+            },
+            "headers": {
+                "Content-Length": {
+                    "description": "The Content-Length header field indicates the anticipated size of the payload body. Only sent if there is a body.",
+                    "type": "integer"
+                },
+                "Content-Type": {
+                    "description": "The Content-Type header indicates the specific version of the API used to send the payload body.",
+                    "type": "string"
+                }
+            }
+        },
+        "ErrorResponse501": {
+            "description": "Not Implemented - The server does not support the requested service. The client should not retry.",
+            "schema": {
+                "$ref": "#/definitions/ErrorInformationResponse"
+            },
+            "headers": {
+                "Content-Length": {
+                    "description": "The Content-Length header field indicates the anticipated size of the payload body. Only sent if there is a body.",
+                    "type": "integer"
+                },
+                "Content-Type": {
+                    "description": "The Content-Type header indicates the specific version of the API used to send the payload body.",
+                    "type": "string"
+                }
+            }
+        },
+        "ErrorResponse503": {
+            "description": "Service Unavailable - The server is currently unavailable to accept any new service requests. This should be a temporary state, and the client should retry within a reasonable time frame.",
+            "schema": {
+                "$ref": "#/definitions/ErrorInformationResponse"
+            },
+            "headers": {
+                "Content-Length": {
+                    "description": "The Content-Length header field indicates the anticipated size of the payload body. Only sent if there is a body.",
+                    "type": "integer"
+                },
+                "Content-Type": {
+                    "description": "The Content-Type header indicates the specific version of the API used to send the payload body.",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "Accept": {
+            "name": "accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "pattern": "^application/json$",
+            "description": "The Accept header field indicates the content type the client accepts. application/json only."
+        },
+        "Content-Length": {
+            "name": "content-length",
+            "in": "header",
+            "required": true,
+            "type": "integer",
+            "minimum": 0,
+            "description": "The Content-Length header field indicates the anticipated size of the payload body. Only sent if there is a body. Note - The API supports a maximum size of 5242880 bytes (5 Megabytes)"
+        },
+        "Content-Type": {
+            "name": "content-type",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "pattern": "^application/json$",
+            "description": "The Content-Type header indicates the content type the client is providing data in. application/json only."
+        }
+    }
+}
