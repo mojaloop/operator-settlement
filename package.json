@@ -13,9 +13,12 @@
         "registry": "https://registry.npmjs.org"
     },
     "dependencies": {
-        "hapi": "^17.0.0",
+        "@internal/model": "file:model",
         "boom": "^7.1.1",
-        "hapi-openapi": "^1.0.0"
+        "hapi": "^17.0.0",
+        "hapi-openapi": "^1.0.0",
+        "knex": "^0.15.2",
+        "mysql": "^2.16.0"
     },
     "devDependencies": {
         "eslint": "^2",

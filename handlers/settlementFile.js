@@ -1,6 +1,7 @@
 'use strict';
 
 const Boom = require('boom');
+const db = require('@internal/model').database;
 
 /**
  * Operations on /settlementFile/
@@ -13,7 +14,7 @@ module.exports = {
      * produces: 
      * responses: 201, 400, 401, 403, 404, 405, 406, 501, 503
      */
-    post: function PostSettlementFile(request, h) {
-        return Boom.notImplemented();
+    post: async function PostSettlementFile(req, h) {
+        return await db.saveSettlementFile(req.body);
     }
 };
