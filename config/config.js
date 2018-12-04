@@ -4,7 +4,10 @@
 const defEnv = (key, def) => (key in process.env) ? process.env[key] : def;
 
 module.exports = {
-    dfspConf: JSON.parse(process.env['DFSP_CONF']),
+    server: {
+        port: defEnv('LISTEN_PORT', 3000),
+        address: defEnv('LISTEN_ADDRESS', '0.0.0.0')
+    },
     database: {
         client: defEnv('DB_PROTOCOL', 'mysql'),
         connection: {
@@ -15,8 +18,8 @@ module.exports = {
             database: defEnv('DB_SCHEMA', 'central_ledger')
         },
         pool: {
-            min: process.env['DB_POOL_MINSIZE'] || 10,
-            max: process.env['DB_POOL_MAXSIZE'] || 10
+            min: defEnv('DB_POOL_MINSIZE', 10),
+            max: defEnv('DB_POOL_MAXSIZE', 10)
         }
     }
 };

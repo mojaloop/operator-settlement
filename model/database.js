@@ -30,11 +30,13 @@ class Database {
     }
 
     async saveSettlementFile({ settlementId, settlementFile }) {
-        return await this.queryBuilder('settlementFile')
+        const settlementFileId = (await this.queryBuilder('settlementFile')
             .insert({
                 settlementId,
                 settlementFile
-            });
+            }))[0];
+        return await this.queryBuilder('settlementFile')
+            .where({ settlementFileId });
     }
 }
 

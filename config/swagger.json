@@ -16,7 +16,7 @@
         "application/json"
     ],
     "paths": {
-        "/settlementFile/": {
+        "/settlementFile": {
             "post": {
                 "description": "Save a new settlement file.",
                 "summary": "PostSettlementFile",
@@ -32,6 +32,9 @@
                         "schema": {
                             "$ref": "#/definitions/NewSettlementFile"
                         }
+                    },
+                    {
+                        "$ref": "#/parameters/Content-Length"
                     },
                     {
                         "$ref": "#/parameters/Content-Type"
@@ -167,108 +170,21 @@
                 }
             }
         },
-        "Date": {
-            "title": "Date",
-            "type": "string",
-            "pattern": "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)$",
-            "description": "The API data type Date is a JSON String in a lexical format that is restricted by a regular expression for interoperability reasons. This format, as specified in ISO 8601, contains a date only. A more readable version of the format is yyyy-MM-dd. Examples - \"1982-05-23\", \"1987-08-05”"
-        },
-        "ErrorCode": {
-            "title": "ErrorCode",
-            "type": "string",
-            "pattern": "^[1-9]\\d{3}$",
-            "description": "The API data type ErrorCode is a JSON String of four characters, consisting of digits only. Negative numbers are not allowed. A leading zero is not allowed. Each error code in the API is a four-digit number, for example, 1234, where the first number (1 in the example) represents the high-level error category, the second number (2 in the example) represents the low-level error category, and the last two numbers (34 in the example) represents the specific error."
-        },
-        "ErrorDescription": {
-            "title": "ErrorDescription",
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "description": "Error description string."
-        },
-        "ErrorInformation": {
-            "title": "ErrorInformation",
-            "type": "object",
-            "description": "Data model for the complex type ErrorInformation.",
-            "properties": {
-                "errorCode": {
-                    "type": "string",
-                    "description": "Specific error number."
-                },
-                "errorDescription": {
-                    "type": "string",
-                    "description": "Error description string."
-                },
-                "extensionList": {
-                    "$ref": "#/definitions/ExtensionList",
-                    "description": "Optional list of extensions, specific to deployment."
-                }
-            },
-            "required": [
-                "errorCode",
-                "errorDescription"
-            ]
-        },
-        "ErrorInformationObject": {
-            "title": "ErrorInformationObject",
-            "type": "object",
-            "description": "Data model for the complex type object that contains ErrorInformation.",
-            "properties": {
-                "errorInformation": {
-                    "$ref": "#/definitions/ErrorInformation"
-                }
-            },
-            "required": [
-                "errorInformation"
-            ]
-        },
         "ErrorInformationResponse": {
             "title": "ErrorInformationResponse",
             "type": "object",
-            "description": "Data model for the complex type object that contains an optional element ErrorInformation used along with 4xx and 5xx responses.",
+            "description": "Contains ",
             "properties": {
-                "errorInformation": {
-                    "$ref": "#/definitions/ErrorInformation"
+                "code": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Error code corresponding to error reason."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "Human-readable error information."
                 }
             }
-        },
-        "Extension": {
-            "title": "Extension",
-            "type": "object",
-            "description": "Data model for the complex type Extension",
-            "properties": {
-                "key": {
-                    "type": "string",
-                    "description": "Extension key."
-                },
-                "value": {
-                    "type": "string",
-                    "description": "Extension value."
-                }
-            },
-            "required": [
-                "key",
-                "value"
-            ]
-        },
-        "ExtensionList": {
-            "title": "ExtensionList",
-            "type": "object",
-            "description": "Data model for the complex type ExtensionList",
-            "properties": {
-                "extension": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Extension"
-                    },
-                    "minItems": 1,
-                    "maxItems": 16,
-                    "description": "Number of Extension elements"
-                }
-            },
-            "required": [
-                "extension"
-            ]
         }
     },
     "responses": {

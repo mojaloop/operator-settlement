@@ -15,6 +15,9 @@
     "dependencies": {
         "@internal/model": "file:model",
         "boom": "^7.1.1",
+        "good": "^8.1.1",
+        "good-console": "^7.1.0",
+        "good-squeeze": "^5.1.0",
         "hapi": "^17.0.0",
         "hapi-openapi": "^1.0.0",
         "knex": "^0.15.2",

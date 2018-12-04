@@ -1,8 +1,5 @@
 'use strict';
 
-const Boom = require('boom');
-const db = require('@internal/model').database;
-
 /**
  * Operations on /settlementFile/{settlementId}
  */
@@ -15,6 +12,11 @@ module.exports = {
      * responses: 202, 400, 401, 403, 404, 405, 406, 501, 503
      */
     get: async function GetSettlementFilesBySettlementID(req, h) {
-        return await db.getSettlementFilesBySettlementId(req.params.ID);
+        const { logger, db } = req.server.app;
+        try {
+            return await db.getSettlementFilesBySettlementId(req.params.settlementId);
+        } catch (e) {
+            return h.response({ message: 'Unhandled server error', code: 1000 }).code(500);
+        }
     }
 };
