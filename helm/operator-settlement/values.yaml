@@ -1,0 +1,32 @@
+# Default values for casablanca-operator-settlement
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: casablanca-casa-docker-release.jfrog.io/casablanca-operator-settlement
+  tag: latest
+  pullPolicy: Always
+
+init:
+  enabled: true
+  image:
+    repository: casablanca-casa-docker-release.jfrog.io/casablanca-operator-settlement-init
+    tag: latest
+    pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+
+db:
+  protocol: 'mysql'
+  host: 'centralledger-mysql'
+  port: '3306'
+  user: 'central_ledger'
+  password: 'oyMxgZChuu'
+  schema: 'central_ledger'
+  minPoolConns: 10
+  maxPoolConns: 10
+
+imageCredentials:
+  name: dock-casa-secret

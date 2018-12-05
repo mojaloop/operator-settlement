@@ -1,0 +1,50 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "operator-settlement.fullname" . }}
+  labels:
+    app: {{ template "operator-settlement.name" . }}
+    chart: {{ template "operator-settlement.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "operator-settlement.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "operator-settlement.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      {{- if .Values.init.enabled }}
+      initContainers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.init.image.repository }}:{{ .Values.init.image.tag }}
+          imagePullPolicy: {{ .Values.init.image.pullPolicy }}
+          envFrom:
+          - secretRef:
+              name: {{ .Chart.Name }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          envFrom:
+          - secretRef:
+              name: {{ .Chart.Name }}
+      imagePullSecrets:
+        - name: {{ .Values.imageCredentials.name }}
