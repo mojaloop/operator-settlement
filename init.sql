@@ -8,8 +8,9 @@
 
 CREATE TABLE IF NOT EXISTS settlementFile (
     `settlementFileId` bigint(20) unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Surrogate PK',
-    `settlementId` bigint(20) unsigned NOT NULL,
-    `createdDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `settlementId` bigint(20) unsigned NOT NULL COMMENT 'Settlement to which this file corresponds',
+    `createdDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Datetime at which this file was created',
+    `sentDate` datetime COMMENT 'Datetime at which this file was sent to the settlement bank',
     -- Default size of TEXT is 64kb. This should be enough. Additionally, TEXT should be stored on
     -- disk for larger values. This is favourable- there's no point in storing it in memory due to
     -- very infrequent access patterns.
