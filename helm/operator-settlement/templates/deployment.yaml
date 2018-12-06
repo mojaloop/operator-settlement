@@ -20,31 +20,33 @@ spec:
     spec:
       {{- if .Values.init.enabled }}
       initContainers:
-        - name: {{ .Chart.Name }}
-          image: {{ .Values.init.image.repository }}:{{ .Values.init.image.tag }}
-          imagePullPolicy: {{ .Values.init.image.pullPolicy }}
-          envFrom:
-          - secretRef:
-              name: {{ .Chart.Name }}
+      - name: "init"
+        image: {{ .Values.init.image.repository }}:{{ .Values.init.image.tag }}
+        imagePullPolicy: {{ .Values.init.image.pullPolicy }}
+        envFrom:
+        - secretRef:
+            name: {{ template "operator-settlement.fullname" . }}
+      imagePullSecrets:
+      - name: {{ .Values.imageCredentials.name }}
       {{- end }}
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: 3000
-              protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          envFrom:
-          - secretRef:
-              name: {{ .Chart.Name }}
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        # livenessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: http
+        # readinessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: http
+        envFrom:
+        - secretRef:
+            name: {{ template "operator-settlement.fullname" . }}
       imagePullSecrets:
-        - name: {{ .Values.imageCredentials.name }}
+      - name: {{ .Values.imageCredentials.name }}
