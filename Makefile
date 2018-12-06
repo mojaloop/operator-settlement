@@ -8,7 +8,7 @@ VER:=${REV}$(shell if [[ `git status --porcelain` ]]; then echo "-local"; fi)
 REPO:=casablanca-casa-docker-release.jfrog.io
 NAME:=casablanca-operator-settlement
 TAG:=${REPO}/${NAME}:${VER}
-INIT_NAME:=casablanca-operator-settlement-init
+INIT_NAME:=${NAME}-init
 INIT_TAG:=${REPO}/${INIT_NAME}:${VER}
 REPO_ROOT:=$(shell git rev-parse --show-toplevel)
 
@@ -47,10 +47,10 @@ build_clean_init: create_clean_temp_repo
 build_clean_all: build_clean build_clean_init
 
 push_clean: build_clean
-	docker push -t ${REPO}/${NAME}:${REV}
+	docker push ${REPO}/${NAME}:${REV}
 
 push_clean_init: build_clean_init
-	docker push -t ${REPO}/${INIT_NAME}:${REV}
+	docker push ${REPO}/${INIT_NAME}:${REV}
 
 push_clean_all: push_clean push_clean_init
 
