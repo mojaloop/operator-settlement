@@ -9,4 +9,4 @@ COPY ./package.json ./package-lock.json /src/
 COPY ./model/package.json /src/model/package.json
 RUN npm install --production
 
-COPY ./model/ ./handlers/ ./config/ /src/
+COPY ./server.js ./model/ ./handlers/ ./config/ /src/
