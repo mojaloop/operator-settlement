@@ -7,12 +7,11 @@ const Database = require('@internal/model').database;
 const config = require('./config/config');
 const Good = require('good');
 
-const init = async function() {
+const init = async function(db, logger = () => {}) {
     const server = new Hapi.Server({
         ...config.server,
         host: config.server.address
     });
-    const logger = console.log.bind(console);
 
     await server.register([{
         plugin: HapiOpenAPI,
@@ -39,20 +38,41 @@ const init = async function() {
         }
     }]);
 
-    const db = new Database(config.database, { logger });
-    await db.connect();
-
     Object.assign(server.app, { db, logger });
     server.app.db = db;
+
+    //add a health endpoint on /
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: async (req, h) => {
+            if (!(await db.isConnected())) {
+                return h.response({
+                    statusCode: 500,
+                    error: 'Internal Server Error',
+                    message: 'Database not connected' }).code(500);
+            }
+            return h.response().code(200);
+        }
+    });
 
     await server.start();
 
     return server;
 };
 
-init().then((server) => {
-    server.plugins.openapi.setHost(server.info.host + ':' + server.info.port);
+if (require.main === module) {
+    (async () => {
+        const logger = console.log.bind(console);
+        const db = new Database(config.database, { logger });
+        await db.connect();
+        init(db, logger).then((server) => {
+            server.plugins.openapi.setHost(server.info.host + ':' + server.info.port);
 
-    server.app.logger(`Server running on ${server.info.host}:${server.info.port}`);
-    server.log(['info'], `Server running on ${server.info.host}:${server.info.port}`);
-});
+            server.app.logger(`Server running on ${server.info.host}:${server.info.port}`);
+            server.log(['info'], `Server running on ${server.info.host}:${server.info.port}`);
+        });
+    })();
+} else {
+    module.exports = { init };
+}

@@ -24,13 +24,13 @@
         "mysql": "^2.16.0"
     },
     "devDependencies": {
+        "ava": "1.0.1",
         "eslint": "^2",
-        "tape": "^4",
         "istanbul": "~0.4.3",
         "swagmock": "~0.0.2"
     },
     "scripts": {
-        "test": "tape 'tests/**/*.js'",
+        "test": "ava 'tests/**/*.js'",
         "cover": "istanbul cover tape -- 'tests/**/*.js'",
         "lint": "eslint .",
         "regenerate": "yo swaggerize:test --framework hapi --apiPath './config/swagger.json'"

@@ -24,6 +24,23 @@ class Database {
         return this;
     }
 
+    /**
+     * Check whether the database connection has basic functionality
+     *
+     * @returns {boolean}
+     */
+    async isConnected() {
+        try {
+            const result = await this.queryBuilder.raw('SELECT 1 + 1 AS result');
+            if (result) {
+                return true;
+            }
+            return false;
+        } catch(err) {
+            return false;
+        }
+    }
+
     async getSettlementFilesBySettlementId(settlementId) {
         return await this.queryBuilder('settlementFile')
             .where({ settlementId });
