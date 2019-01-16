@@ -56,16 +56,23 @@ const init = async function(db, logger = () => {}) {
         }
     });
 
-    server.ext('onRequest', function(request, h) {
+    server.ext('onRequest', function(req, h) {
         logger('NEW REQUEST');
-        logger(request.method.toUpperCase(), request.path);
-        logger('request path', request.path);
-        logger('request method', request.method);
-        logger('request body', request.body);
-        logger('request headers', request.headers);
+        logger(req.method.toUpperCase(), req.path);
+        logger('request path', req.path);
+        logger('request method', req.method);
+        logger('request payload', req.payload);
+        logger('request headers', req.headers);
         return h.continue;
     });
 
+    server.ext('onPreResponse', function(req, h) {
+        logger('SENDING RESPONSE');
+        logger('response code', req.response.statusCode);
+        // logger('response payload', req.response.);
+        logger('response headers', req.response.headers);
+        return h.continue;
+    })
     await server.start();
 
     return server;
