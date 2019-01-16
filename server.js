@@ -71,13 +71,18 @@ const init = async function(db, logger = () => {}) {
         return h.continue;
     });
 
-    server.ext('onPreResponse', function(req, h) {
+    server.events.on('response', function(req) {
         logger('SENDING RESPONSE');
+        logger('request path', req.path);
+        logger('request method', req.method);
+        // TODO: has the payload been assigned at this point?
+        logger('request payload', req.payload);
+        logger('request headers', req.headers);
         logger('response', req.response);
         logger('response code', req.response.statusCode);
         // logger('response payload', req.response.);
         logger('response headers', req.response.headers);
-        return h.continue;
+        // return h.continue;
     });
 
     await server.start();
