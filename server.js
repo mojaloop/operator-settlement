@@ -56,6 +56,16 @@ const init = async function(db, logger = () => {}) {
         }
     });
 
+    server.ext('onRequest', function(request, h) {
+        logger('NEW REQUEST');
+        logger(request.method.toUpperCase(), request.path);
+        logger('request path', request.path);
+        logger('request method', request.method);
+        logger('request body', request.body);
+        logger('request headers', request.headers);
+        return h.continue;
+    });
+
     await server.start();
 
     return server;
@@ -63,7 +73,7 @@ const init = async function(db, logger = () => {}) {
 
 if (require.main === module) {
     (async () => {
-        const logger = console.log.bind(console);
+        const logger = (...args) => { console.log(`[${(new Date()).toISOString()}]`, ...args); };
         const db = new Database(config.database, { logger });
         await db.connect();
         init(db, logger).then((server) => {
