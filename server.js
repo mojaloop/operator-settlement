@@ -72,7 +72,8 @@ const init = async function(db, logger = () => {}) {
         // logger('response payload', req.response.);
         logger('response headers', req.response.headers);
         return h.continue;
-    })
+    });
+
     await server.start();
 
     return server;
