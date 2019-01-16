@@ -6,6 +6,7 @@ const Path = require('path');
 const Database = require('@internal/model').database;
 const config = require('./config/config');
 const Good = require('good');
+const util = require('util');
 
 const init = async function(db, logger = () => {}) {
     const server = new Hapi.Server({
@@ -76,7 +77,7 @@ const init = async function(db, logger = () => {}) {
         logger('request path', req.path);
         logger('request method', req.method);
         // TODO: has the payload been assigned at this point?
-        logger('request payload', req.payload);
+        logger('request payload', util.inspect(req.payload, { depth: Infinity }));
         logger('request headers', req.headers);
         logger('response', req.response);
         logger('response code', req.response.statusCode);
