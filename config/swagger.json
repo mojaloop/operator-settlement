@@ -139,16 +139,8 @@
                     "description": "Unique identifier associated with the settlement file"
                 },
                 "settlementFile": {
-                    "type": "object",
-                    "properties": {
-                        "raw": {
-                            "type": "string",
-                            "description": "The raw payment matrix data"
-                        },
-                        "file": {
-                            "type": "string",
-                            "description": "A string containing the ISO 20022 pain.001.001.03 XML settlement file. Note that this file is not validated by this service because a) we do not have access to a validator for this format; and b) the settlement bank further restricts our usage to a subset of this format."
-                        }
+                    "type": "string",
+                    "description": "A string containing the ISO 20022 pain.001.001.03 XML settlement file. Note that this file is not validated by this service because a) we do not have access to a validator for this format; and b) the settlement bank further restricts our usage to a subset of this format."
                     }
                 }
             }
