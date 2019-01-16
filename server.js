@@ -68,6 +68,7 @@ const init = async function(db, logger = () => {}) {
 
     server.ext('onPreResponse', function(req, h) {
         logger('SENDING RESPONSE');
+        logger('response', req.response);
         logger('response code', req.response.statusCode);
         // logger('response payload', req.response.);
         logger('response headers', req.response.headers);
