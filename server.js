@@ -23,6 +23,10 @@ const init = async function(db, logger = () => {}) {
     }, {
         plugin: Good,
         options: {
+            includes: {
+                request: ['headers', 'payload'],
+                response: ['headers', 'payload']
+            },
             ops: {
                 interval: 1000
             },
@@ -61,6 +65,7 @@ const init = async function(db, logger = () => {}) {
         logger(req.method.toUpperCase(), req.path);
         logger('request path', req.path);
         logger('request method', req.method);
+        // TODO: has the payload been assigned at this point?
         logger('request payload', req.payload);
         logger('request headers', req.headers);
         return h.continue;
