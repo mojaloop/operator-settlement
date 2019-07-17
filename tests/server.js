@@ -3,8 +3,6 @@
 const test = require('ava');
 const Server = require('../server');
 
-const logger = console.log.bind(console);
-
 // CV0-2481
 test('Database failure causes health-check to fail', async function (t) {
     const db = {
