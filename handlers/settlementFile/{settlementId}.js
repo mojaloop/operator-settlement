@@ -12,7 +12,7 @@ module.exports = {
      * responses: 202, 400, 401, 403, 404, 405, 406, 501, 503
      */
     get: async function GetSettlementFilesBySettlementID(req, h) {
-        const { logger, db } = req.server.app;
+        const { logger, db } = req.server.app; // eslint-disable-line
         try {
             return await db.getSettlementFilesBySettlementId(req.params.settlementId);
         } catch (e) {
