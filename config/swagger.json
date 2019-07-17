@@ -141,6 +141,10 @@
                 "settlementFile": {
                     "type": "string",
                     "description": "A string containing the ISO 20022 pain.001.001.03 XML settlement file. Note that this file is not validated by this service because a) we do not have access to a validator for this format; and b) the settlement bank further restricts our usage to a subset of this format."
+                },
+                "source": {
+                    "type": "string",
+                    "description": "A stringyfied JSON object containing the simplified version of the settlement file."
                 }
             }
         },
@@ -167,6 +171,14 @@
                 "settlementFile": {
                     "type": "string",
                     "description": "A string containing the ISO 20022 pain.001.001.03 XML settlement file. Note that this file is not validated by this service because a) we do not have access to a validator for this format; and b) the settlement bank further restricts our usage to a subset of this format."
+                },
+                "source": {
+                    "type": "string",
+                    "description": "A stringyfied JSON object containing the simplified version of the settlement file."
+                },
+                "state": {
+                    "type": "string",
+                    "description": "A stringyfied JSON object containing the simplified version of the settlement file that remains to be processed."
                 }
             }
         },

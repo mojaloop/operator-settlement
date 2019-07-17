@@ -10,7 +10,7 @@ test('Database failure causes health-check to fail', async function (t) {
     const db = {
         isConnected: () => false
     };
-    const server = await Server.init(db, logger);
+    const server = await Server.init(db);
 
     const options = {
         method: 'get',
