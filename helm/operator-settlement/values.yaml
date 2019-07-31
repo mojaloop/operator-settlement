@@ -10,7 +10,7 @@ image:
 init:
   enabled: true
   image:
-    repository: casablanca-casa-docker-release.jfrog.io/casablanca-operator-settlement-init
+    repository: casablanca-casa-docker-release.jfrog.io/operator-settlement-init
     tag: latest
     pullPolicy: Always
 
