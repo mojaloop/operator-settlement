@@ -27,6 +27,7 @@ defaults_build_docker_build: &defaults_build_docker_build
   command: |
     echo "Building Docker image: $CIRCLE_TAG"
     docker build --pull --build-arg SSH_KEY="$(echo $CASA_LIB_DEPLOY_KEY_B64_ENC | base64 -d)" -t $DOCKER_ORG/$CIRCLE_PROJECT_REPONAME:$CIRCLE_TAG .
+    docker build --pull -t $DOCKER_ORG/$CIRCLE_PROJECT_REPONAME-init:$CIRCLE_TAG -f ./Dockerfile.dbinit .
 defaults_build_docker_build_release: &defaults_build_docker_build_release
   name: Build Docker $RELEASE_TAG image
   command: |
