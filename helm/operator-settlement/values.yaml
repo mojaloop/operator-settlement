@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 image:
-  repository: casablanca-casa-docker-release.jfrog.io/casablanca-operator-settlement
+  repository: casablanca-casa-docker-release.jfrog.io/operator-settlement
   tag: latest
   pullPolicy: Always
 
