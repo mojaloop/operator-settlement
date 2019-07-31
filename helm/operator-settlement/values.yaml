@@ -20,7 +20,7 @@ service:
 
 db:
   protocol: 'mysql'
-  host: 'centralledger-mysql'
+  host: '$release_name-centralledger-mysql'
   port: '3306'
   user: 'central_ledger'
   password: 'oyMxgZChuu'
