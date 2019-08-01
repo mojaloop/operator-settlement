@@ -55,8 +55,8 @@ jobs:
     <<: *defaults_working_directory
     <<: *defaults_docker_node
     steps:
-      - checkout # Checkout will use the ssh key configured for the repo in CircleCI
-       - run:
+      - checkout
+      - run:
           name: create-npmrc
           command: echo $AZURE_NPM_REGISTRY_NPMRC_B64 | base64 -d > .npmrc
       - run:
