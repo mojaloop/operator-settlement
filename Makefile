@@ -11,6 +11,7 @@ TAG:=${REPO}/${NAME}:${VER}
 INIT_NAME:=${NAME}-init
 INIT_TAG:=${REPO}/${INIT_NAME}:${VER}
 REPO_ROOT:=$(shell git rev-parse --show-toplevel)
+NPMRC_B64:=$(shell base64 -w 0 < ./.npmrc)
 
 ## NORMAL BUILDS
 # Containing any local modifications or untracked files, if present. If none are present, will
@@ -19,10 +20,10 @@ REPO_ROOT:=$(shell git rev-parse --show-toplevel)
 all: build
 
 build:
-	docker build --pull=true -t ${TAG} ./
+	docker build --pull=true -t ${TAG} --build-arg NPMRC_B64="${NPMRC_B64}" ./
 
 build_init:
-	docker build --pull=true -t ${INIT_TAG} -f ./Dockerfile.dbinit ./
+	docker build --pull=true -t ${INIT_TAG} -f ./Dockerfile.dbinit --build-arg NPMRC_B64="${NPMRC_B64}" ./
 
 build_all: build build_init
 
@@ -39,10 +40,11 @@ push_all: push push_init
 # Create a build from the current repo HEAD, without modifications or untracked files
 
 build_clean: create_clean_temp_repo
-	docker build --pull=true -t ${REPO}/${NAME}:${REV} ${CLEAN_BUILD_DIR}
+	docker build --pull=true -t ${REPO}/${NAME}:${REV} ${CLEAN_BUILD_DIR} --build-arg NPMRC_B64="${NPMRC_B64}"
 
 build_clean_init: create_clean_temp_repo
-	docker build --pull=true -t ${REPO}/${INIT_NAME}:${REV} -f ./Dockerfile.dbinit ${CLEAN_BUILD_DIR}
+	docker build --pull=true -t ${REPO}/${INIT_NAME}:${REV} -f ./Dockerfile.dbinit ${CLEAN_BUILD_DIR} \
+	--build-arg NPMRC_B64="${NPMRC_B64}"
 
 build_clean_all: build_clean build_clean_init
 
