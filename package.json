@@ -3,12 +3,13 @@
     "description": "",
     "version": "1.0.0",
     "author": "Matt Kingston, ModusBox Inc. <matt.kingston@modusbox.com>",
+    "license": "UNLICENSED",
     "contributors": [],
     "repository": {
         "type": "git",
-        "url": "git://github.com/msk-/operator-settlement.git"
+        "url": "git://github.com/casablanca-project/operator-settlement.git"
     },
-    "bugs": "http://github.com/msk-/operator-settlement/issues",
+    "bugs": "http://github.com/casablanca-project/operator-settlement/issues",
     "publishConfig": {
         "registry": "https://registry.npmjs.org"
     },
