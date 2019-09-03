@@ -1,9 +1,7 @@
 
-FROM node:8.11.3-alpine
+FROM node:8.11.3-alpine AS builder
 
 WORKDIR /src
-
-CMD ["node", "./server.js"]
 
 # 'AZURE_NPM_REGISTRY_NPMRC_B64' environment variable is available in the CircleCI environment.
 # It contains the .npmrc configuration and credentials (base64 encoded) required to connect and publish to private 
@@ -21,12 +19,23 @@ ARG NPMRC_B64
 RUN echo "${NPMRC_B64}" | base64 -d > /src/.npmrc
 
 COPY ./package.json ./yarn.lock /src/
-COPY ./model/package.json /src/model/package.json
+# Note that when we run `yarn install` this directory is copied into `node_modules`. This differs
+# from `npm install`, which symlinks this directory. When using `npm` it should be possible to:
+# COPY ./model/package.json /src/model/package.json
+# then later, in the next stage:
+# COPY ./model /src/model
+COPY ./model /src/model
 
-RUN yarn install --frozen-lockfile  && \
+RUN yarn install --frozen-lockfile && \
     rm -f /src/.npmrc
 
-COPY ./model /src/model
+FROM node:8.11.3-alpine
+
+WORKDIR /src
+
+CMD ["node", "./server.js"]
+
+COPY --from=builder /src /src
 COPY ./handlers /src/handlers
 COPY ./config /src/config
 COPY ./server.js /src/
