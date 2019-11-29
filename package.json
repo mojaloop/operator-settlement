@@ -3,13 +3,13 @@
     "description": "",
     "version": "1.0.0",
     "author": "Matt Kingston, ModusBox Inc. <matt.kingston@modusbox.com>",
-    "license": "UNLICENSED",
+    "license": "Apache-2.0",
     "contributors": [],
     "repository": {
         "type": "git",
-        "url": "git://github.com/casablanca-project/operator-settlement.git"
+        "url": "git://github.com/mojaloop/operator-settlement.git"
     },
-    "bugs": "http://github.com/casablanca-project/operator-settlement/issues",
+    "bugs": "https://github.com/mojaloop/operator-settlement/issues",
     "publishConfig": {
         "registry": "https://registry.npmjs.org"
     },
@@ -25,11 +25,12 @@
         "mysql": "^2.16.0"
     },
     "devDependencies": {
+        "ava": "^2.4.0",
         "eslint": "^2",
         "istanbul": "~0.4.3"
     },
     "scripts": {
-        "test": "ava 'tests/**/*.js'",
+        "test": "ava tests/*.js",
         "cover": "istanbul cover tape -- 'tests/**/*.js'",
         "lint": "eslint .",
         "regenerate": "yo swaggerize:test --framework hapi --apiPath './config/swagger.json'"

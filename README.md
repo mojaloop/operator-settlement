@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/mojaloop/operator-settlement/tree/master.svg?style=svg)](https://circleci.com/gh/mojaloop/operator-settlement/tree/master)
+
 # operator-settlement
 
 Swagger api [location](./config/swagger.json)
