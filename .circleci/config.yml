@@ -19,6 +19,7 @@ defaults_Dependencies: &defaults_Dependencies |
   apk --no-cache add openssh-client
   apk --no-cache add bash
   apk add --no-cache -t build-dependencies make gcc g++ python libtool autoconf automake
+  apk add --no-cache jq
   npm config set unsafe-perm true
   npm install -g node-gyp
 
@@ -47,6 +48,11 @@ defaults_build_docker_login: &defaults_build_docker_login
   name: Login to Docker Hub
   command: |
     docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+defaults_check_versions: &defaults_check_versions
+  name: Check release tag is the same as the package version
+  command: |
+    jq -e ".version == \"${CIRCLE_TAG/v/}\"" package.json
 
 defaults_build_docker_build: &defaults_build_docker_build
   name: Build Docker image
@@ -311,6 +317,8 @@ jobs:
       - run:
           <<: *defaults_build_docker_login
       - run:
+          <<: *defaults_check_versions
+      - run:
           <<: *defaults_build_docker_build
       - run:
           <<: *defaults_build_docker_build_release
@@ -335,6 +343,8 @@ jobs:
       - run:
           <<: *defaults_build_docker_login
       - run:
+          <<: *defaults_check_versions
+      - run:
           <<: *defaults_build_docker_build
       - run:
           <<: *defaults_build_docker_publish
@@ -352,6 +362,8 @@ jobs:
             echo 'export RELEASE_TAG=$RELEASE_TAG_PROD' >> $BASH_ENV
       - run:
           <<: *defaults_build_docker_login
+      - run:
+          <<: *defaults_check_versions
       - run:
           <<: *defaults_build_docker_build
       - run:
