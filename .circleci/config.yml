@@ -19,6 +19,7 @@ defaults_Dependencies: &defaults_Dependencies |
   apk --no-cache add openssh-client
   apk --no-cache add bash
   apk add --no-cache -t build-dependencies make gcc g++ python libtool autoconf automake
+  apk add --no-cache jq
   npm config set unsafe-perm true
   npm install -g node-gyp
 
@@ -51,6 +52,7 @@ defaults_build_docker_login: &defaults_build_docker_login
 defaults_build_docker_build: &defaults_build_docker_build
   name: Build Docker image
   command: |
+    jq -e ".version == \"${CIRCLE_TAG/v/}\"" package.json
     docker build -t $DOCKER_ORG/$CIRCLE_PROJECT_REPONAME:$CIRCLE_TAG -t $DOCKER_ORG/$CIRCLE_PROJECT_REPONAME:$RELEASE_TAG .
 
 defaults_build_docker_build_release: &defaults_build_docker_build_release
