@@ -1,22 +1,16 @@
 FROM node:8.11.3-alpine AS builder
 
+WORKDIR /opt/operator-settlement
+
 RUN apk update && apk add bash mysql-client
 
-WORKDIR /src
-
-COPY ./init.sql /src/
-COPY ./package.json ./package-lock.json /src/
-COPY ./model /src/model
+COPY ./init.sql /opt/operator-settlement/
+COPY ./package.json ./package-lock.json /opt/operator-settlement/
+COPY ./model /opt/operator-settlement/model
+COPY ./handlers /opt/operator-settlement/handlers
+COPY ./config /opt/operator-settlement/config
+COPY ./server.js /opt/operator-settlement/
 
 RUN npm install
 
-FROM node:8.11.3-alpine
-
-WORKDIR /src
-
 CMD ["node", "./server.js"]
-
-COPY --from=builder /src /src
-COPY ./handlers /src/handlers
-COPY ./config /src/config
-COPY ./server.js /src/
