@@ -1,7 +1,7 @@
 {
     "name": "operator-settlement",
     "description": "",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "author": "Matt Kingston, ModusBox Inc. <matt.kingston@modusbox.com>",
     "license": "Apache-2.0",
     "contributors": [],
