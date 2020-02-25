@@ -1,7 +1,7 @@
 {
     "name": "operator-settlement",
     "description": "",
-    "version": "8.8.0",
+    "version": "9.2.0",
     "author": "Matt Kingston, ModusBox Inc. <matt.kingston@modusbox.com>",
     "license": "Apache-2.0",
     "contributors": [],
@@ -15,19 +15,19 @@
     },
     "dependencies": {
         "@internal/model": "file:model",
-        "boom": "^7.1.1",
-        "good": "^8.1.1",
-        "good-console": "^7.1.0",
-        "good-squeeze": "^5.1.0",
-        "hapi": "^17.0.0",
-        "hapi-openapi": "^1.0.0",
-        "knex": "^0.19.5",
-        "mysql": "^2.16.0"
+        "boom": "7.3.0",
+        "good": "8.1.2",
+        "good-console": "8.0.0",
+        "good-squeeze": "5.1.0",
+        "hapi": "18.1.0",
+        "hapi-openapi": "1.2.6",
+        "knex": "0.20.10",
+        "mysql": "2.18.1"
     },
     "devDependencies": {
-        "ava": "^2.4.0",
-        "eslint": "^4",
-        "istanbul": "~0.4.3"
+        "ava": "3.4.0",
+        "eslint": "6",
+        "istanbul": "0.4.5"
     },
     "scripts": {
         "test": "ava tests/*.js",
