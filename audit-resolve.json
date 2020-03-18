@@ -1,0 +1,26 @@
+{
+  "decisions": {
+    "1168|hapi>subtext": {
+      "decision": "postpone",
+      "madeAt": 1582871163741
+    },
+    "1478|hapi>subtext": {
+      "decision": "postpone",
+      "madeAt": 1582871163741
+    },
+    "1479|hapi>subtext": {
+      "decision": "postpone",
+      "madeAt": 1582871163741
+    },
+    "1472|hapi>ammo": {
+      "decision": "postpone",
+      "madeAt": 1582871167429
+    },
+    "1481|hapi": {
+      "decision": "postpone",
+      "madeAt": 1582871168772
+    }
+  },
+  "rules": {},
+  "version": 1
+}
