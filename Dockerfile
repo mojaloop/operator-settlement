@@ -3,7 +3,7 @@ FROM node:8.11.3-alpine AS builder
 
 WORKDIR /opt/operator-settlement
 
-RUN apk update && apk add bash mysql-client
+RUN apk update && apk add bash
 
 COPY ./init.sql /opt/operator-settlement/
 COPY ./package.json ./package-lock.json /opt/operator-settlement/
@@ -17,6 +17,8 @@ RUN npm install
 ## Run-time Image
 FROM node:8.11.3-alpine
 WORKDIR /opt/operator-settlement
+
+RUN apk update && apk add bash mysql-client
 
 COPY --from=builder /opt/operator-settlement .
 
