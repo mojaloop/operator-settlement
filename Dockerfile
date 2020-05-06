@@ -11,6 +11,6 @@ COPY ./handlers /opt/operator-settlement/handlers
 COPY ./config /opt/operator-settlement/config
 COPY ./server.js /opt/operator-settlement/
 
-RUN npm install
+RUN npm install --production
 
 CMD ["node", "./server.js"]
