@@ -1,3 +1,4 @@
+## Builder Image
 FROM node:8.11.3-alpine AS builder
 
 WORKDIR /opt/operator-settlement
@@ -11,6 +12,14 @@ COPY ./handlers /opt/operator-settlement/handlers
 COPY ./config /opt/operator-settlement/config
 COPY ./server.js /opt/operator-settlement/
 
-RUN npm install --production
+RUN npm install
+
+## Run-time Image
+FROM node:8.11.3-alpine
+WORKDIR /opt/operator-settlement
+
+COPY --from=builder /opt/operator-settlement .
+
+RUN npm prune --production
 
 CMD ["node", "./server.js"]
