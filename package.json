@@ -2,9 +2,11 @@
     "name": "operator-settlement",
     "description": "",
     "version": "9.2.1",
-    "author": "Matt Kingston, ModusBox Inc. <matt.kingston@modusbox.com>",
+    "author": "ModuxBox Inc.",
     "license": "Apache-2.0",
-    "contributors": [],
+    "contributors": [
+        "Matt Kingston, ModusBox Inc. <matt.kingston@modusbox.com>"
+    ],
     "repository": {
         "type": "git",
         "url": "git://github.com/mojaloop/operator-settlement.git"
