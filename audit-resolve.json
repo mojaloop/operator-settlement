@@ -2,28 +2,28 @@
   "decisions": {
     "1168|hapi>subtext": {
       "decision": "ignore",
-      "madeAt": 1588757803340,
-      "expiresAt": 1591349788233
+      "madeAt": 1607559468107,
+      "expiresAt": 1610151177070
     },
     "1478|hapi>subtext": {
       "decision": "ignore",
-      "madeAt": 1588757803340,
-      "expiresAt": 1591349788233
+      "madeAt": 1607559468107,
+      "expiresAt": 1610151177070
     },
     "1479|hapi>subtext": {
       "decision": "ignore",
-      "madeAt": 1588757803340,
-      "expiresAt": 1591349788233
+      "madeAt": 1607559468107,
+      "expiresAt": 1610151177070
     },
     "1472|hapi>ammo": {
       "decision": "ignore",
-      "madeAt": 1588757811276,
-      "expiresAt": 1591349788233
+      "madeAt": 1607559499530,
+      "expiresAt": 1610151177070
     },
     "1481|hapi": {
       "decision": "ignore",
-      "madeAt": 1588757814212,
-      "expiresAt": 1591349788233
+      "madeAt": 1607559513709,
+      "expiresAt": 1610151177070
     },
     "1500|ava>meow>yargs-parser": {
       "decision": "ignore",
@@ -39,6 +39,14 @@
       "decision": "ignore",
       "madeAt": 1588757818553,
       "expiresAt": 1591349788233
+    },
+    "1213|hapi-openapi>dot-prop": {
+      "decision": "fix",
+      "madeAt": 1607559216829
+    },
+    "1523|knex>lodash": {
+      "decision": "fix",
+      "madeAt": 1607559234511
     }
   },
   "rules": {},
