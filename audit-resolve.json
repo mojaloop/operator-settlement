@@ -42,11 +42,11 @@
     },
     "1213|hapi-openapi>dot-prop": {
       "decision": "fix",
-      "madeAt": 1607559216829
+      "madeAt": 1607559850816
     },
     "1523|knex>lodash": {
       "decision": "fix",
-      "madeAt": 1607559234511
+      "madeAt": 1607559860450
     }
   },
   "rules": {},
