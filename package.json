@@ -1,7 +1,7 @@
 {
     "name": "operator-settlement",
     "description": "",
-    "version": "9.2.1",
+    "version": "11.0.0",
     "author": "ModuxBox Inc.",
     "license": "Apache-2.0",
     "contributors": [
@@ -37,8 +37,8 @@
         "cover": "istanbul cover tape -- 'tests/**/*.js'",
         "lint": "eslint .",
         "regenerate": "yo swaggerize:test --framework hapi --apiPath './config/swagger.json'",
-        "audit:resolve": "SHELL=sh resolve-audit",
-        "audit:check": "SHELL=sh check-audit"
+        "audit:resolve": "SHELL=sh resolve-audit --production",
+        "audit:check": "SHELL=sh check-audit --production"
     },
     "generator-swaggerize": {
         "version": "4.1.0"
