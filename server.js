@@ -1,11 +1,11 @@
 'use strict';
 
-const Hapi = require('hapi');
+const Hapi = require('@hapi/hapi');
 const HapiOpenAPI = require('hapi-openapi');
 const Path = require('path');
 const Database = require('@internal/model').database;
 const config = require('./config/config');
-const Good = require('good');
+const Good = require('@hapi/good');
 const util = require('util');
 
 const init = async function(db, logger = () => {}) {
