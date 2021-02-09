@@ -31,9 +31,8 @@
       "expiresAt": 1591349788233
     },
     "1179|istanbul>handlebars>optimist>minimist": {
-      "decision": "ignore",
-      "madeAt": 1588757806594,
-      "expiresAt": 1591349788233
+      "decision": "postpone",
+      "madeAt": 1612888826617
     },
     "1500|npm-audit-resolver>audit-resolve-core>yargs-parser": {
       "decision": "ignore",
