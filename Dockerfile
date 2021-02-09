@@ -1,5 +1,6 @@
 ## Builder Image
-FROM node:8.11.3-alpine AS builder
+FROM node:12.16.1-alpine as builder
+USER root
 
 WORKDIR /opt/operator-settlement
 
@@ -15,8 +16,12 @@ COPY ./server.js /opt/operator-settlement/
 RUN npm install
 
 ## Run-time Image
-FROM node:8.11.3-alpine
+FROM node:12.16.0-alpine
 WORKDIR /opt/operator-settlement
+
+# Create a non-root user: ml-user
+RUN adduser -D ml-user 
+USER ml-user
 
 RUN apk update && apk add bash mysql-client
 
