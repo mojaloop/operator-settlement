@@ -27,7 +27,7 @@ RUN ln -sf /dev/stdout ./logs/combined.log
 RUN adduser -D ml-user 
 USER ml-user
 
-#RUN apk update && apk add bash mysql-client
+RUN apk update && apk add bash mysql-client
 
 COPY --chown=ml-user --from=builder /opt/operator-settlement .
 RUN npm prune --production
