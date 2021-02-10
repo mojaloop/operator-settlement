@@ -19,11 +19,11 @@ RUN npm install
 FROM node:12.16.0-alpine
 WORKDIR /opt/operator-settlement
 
+RUN apk update && apk add bash mysql-client
+
 # Create a non-root user: ml-user
 RUN adduser -D ml-user 
 USER ml-user
-
-RUN apk update && apk add bash mysql-client
 
 COPY --chown=ml-user --from=builder /opt/operator-settlement .
 RUN npm prune --production
